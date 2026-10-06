@@ -48,5 +48,16 @@ Standard objects wherever possible, exactly one custom object, and one automatio
 easy for a team to adopt and cheap to maintain. The build intentionally avoids over-engineering
 (no custom lead object, no separate referral pipeline, no heavy project module).
 
+## How this was built (Claude + MCP)
+The build and its artifacts were accelerated and verified using **Claude connected to Miro and
+Salesforce over MCP** — Claude helps do the work, it doesn't do the work. The methodology is
+documented here:
+
+| Doc | What it covers |
+|-----|----------------|
+| [docs/process-flow-buildout.md](docs/process-flow-buildout.md) | Building the cross-functional process flow in **Miro via MCP**, and how every node maps to the Salesforce objects and automation (the integration steps). |
+| [docs/qa-and-verification.md](docs/qa-and-verification.md) | **QA'ing and verifying** the Salesforce build via the Salesforce MCP — testing the Won automation end to end on a throwaway record — plus a reusable **micro-skill** checklist for verifying any trigger/flow build. |
+| [docs/referral-form-buildout.md](docs/referral-form-buildout.md) | Building the branded **Web-to-Lead referral form** (preserving the pieces that make it post), and **verifying** a submission lands as a Lead — including the page-builder CDN-cache gotcha. |
+
 ---
 Built by [Jibril Sulaiman](https://github.com/carljibrilsulaimanii).
