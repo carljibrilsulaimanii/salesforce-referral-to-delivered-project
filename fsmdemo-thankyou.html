@@ -1,0 +1,182 @@
+<!--
+  Author:        C. Jibril Sulaiman II
+  Date:          2026-09-26
+  For:           Fast Slow Motion - Salesforce interview assignment
+  Purpose:       Return page for the partner referral form. Web-to-Lead redirects here after submit
+                 (retURL = https://carl.jibrilsulaiman.com/fsmdemo-thankyou). Branded to match the form.
+  Deploy:        Host at https://carl.jibrilsulaiman.com/fsmdemo-thankyou
+  Note:          Static confirmation page only - no data is processed here.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referral Received - Fast Slow Motion</title>
+  <style>
+    :root {
+      --fsm-navy: #172B4D;
+      --fsm-navy-deep: #0F1E38;
+      --fsm-orange: #EE6C2B;
+      --fsm-orange-hover: #D65E20;
+      --fsm-green: #2E9E5B;
+      --fsm-bg: #F4F6F9;
+      --fsm-border: #D9DEE7;
+      --fsm-text: #1F2733;
+      --fsm-muted: #5A6472;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--fsm-bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--fsm-text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .card {
+      max-width: 560px;
+      width: 100%;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(15, 30, 56, 0.12);
+      overflow: hidden;
+      border: 1px solid var(--fsm-border);
+    }
+    .card__header {
+      background: var(--fsm-navy);
+      background-image: linear-gradient(135deg, var(--fsm-navy) 0%, var(--fsm-navy-deep) 100%);
+      padding: 30px 40px 26px;
+      text-align: center;
+    }
+    .card__header img {
+      height: 42px;
+      width: auto;
+      background: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+    .card__body {
+      padding: 40px 44px 42px;
+      text-align: center;
+    }
+    .check {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: rgba(46, 158, 91, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check svg { width: 40px; height: 40px; display: block; }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--fsm-navy);
+      letter-spacing: -0.01em;
+    }
+    .lead {
+      margin: 0 auto 26px;
+      max-width: 420px;
+      font-size: 16px;
+      color: var(--fsm-muted);
+    }
+    .steps {
+      text-align: left;
+      background: var(--fsm-bg);
+      border: 1px solid var(--fsm-border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin: 0 0 28px;
+    }
+    .steps__title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--fsm-navy);
+      margin: 0 0 12px;
+    }
+    .steps ul { margin: 0; padding: 0; list-style: none; }
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 14px;
+      color: var(--fsm-text);
+      padding: 6px 0;
+    }
+    .steps li span.n {
+      flex: 0 0 auto;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--fsm-orange);
+      color: #fff;
+      font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--fsm-orange);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 13px 26px;
+      transition: background 0.15s ease;
+    }
+    .btn:hover { background: var(--fsm-orange-hover); }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--fsm-muted);
+      margin-top: 22px;
+    }
+    @media (max-width: 480px) {
+      .card__body { padding: 32px 24px 34px; }
+      .card__header { padding-left: 24px; padding-right: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="card">
+      <div class="card__header">
+        <img src="https://www.fastslowmotion.com/wp-content/uploads/2024/07/FastSlowMotion-logo.png" alt="Fast Slow Motion" />
+      </div>
+
+      <div class="card__body">
+        <div class="check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17l-5-5" stroke="#2E9E5B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <h1>Referral received - thank you!</h1>
+        <p class="lead">We've got the introduction. Our team will reach out to the business you referred, and we'll make sure you get the credit.</p>
+
+        <div class="steps">
+          <p class="steps__title">What happens next</p>
+          <ul>
+            <li><span class="n">1</span><span>We review the referral and connect it to your partner record.</span></li>
+            <li><span class="n">2</span><span>A consultant reaches out to the business you introduced.</span></li>
+            <li><span class="n">3</span><span>You're credited for the referral through to a won engagement.</span></li>
+          </ul>
+        </div>
+
+        <a class="btn" href="https://carl.jibrilsulaiman.com/fsmdemo-page">Submit another referral</a>
+      </div>
+    </div>
+    <p class="footer">Fast Slow Motion &middot; Partner Referral Program</p>
+  </div>
+</body>
+</html>

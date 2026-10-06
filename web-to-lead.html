@@ -1,0 +1,207 @@
+<!--
+  Author:        C. Jibril Sulaiman II
+  Date:          2026-09-26
+  For:           Fast Slow Motion - Salesforce interview assignment
+  Purpose:       INTERNAL partner referral form. A marketing / referral PARTNER uses this to refer a
+                 business to FSM. The standard fields capture the REFERRED BUSINESS (the Lead);
+                 "Referred By" captures the PARTNER submitting it. Lead Source is fixed to Referral Partner.
+  Deploy:        Open locally for the demo, or host on a partner page.
+  Posts to:      Salesforce org 00Dfj00000hkJIL (creates a Lead). reCAPTCHA intentionally off for the demo.
+  SOURCE:        Rebuilt from Salesforce's generated Web-to-Lead HTML - action URL, oid, retURL and all
+                 input "name" values preserved verbatim. City/State/Country removed; lead_source hardwired
+                 to "Referral Partner"; a standard "phone" field added.
+  DO NOT CHANGE:  the <form action>, hidden "oid"/"retURL"/"lead_source", or any input "name"
+                 (first_name, last_name, email, company, phone, 00Nfj00005DlRcD).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refer a Client - Fast Slow Motion</title>
+  <style>
+    :root {
+      --fsm-navy: #172B4D;
+      --fsm-navy-deep: #0F1E38;
+      --fsm-orange: #EE6C2B;
+      --fsm-orange-hover: #D65E20;
+      --fsm-bg: #F4F6F9;
+      --fsm-border: #D9DEE7;
+      --fsm-text: #1F2733;
+      --fsm-muted: #5A6472;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--fsm-bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--fsm-text);
+      line-height: 1.5;
+      padding: 40px 16px;
+    }
+    .card {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(15, 30, 56, 0.12);
+      overflow: hidden;
+      border: 1px solid var(--fsm-border);
+    }
+    .card__header {
+      background: var(--fsm-navy);
+      background-image: linear-gradient(135deg, var(--fsm-navy) 0%, var(--fsm-navy-deep) 100%);
+      color: #fff;
+      padding: 32px 40px 28px;
+      text-align: center;
+    }
+    .card__header img {
+      height: 44px;
+      width: auto;
+      margin-bottom: 18px;
+      background: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+    .card__header h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .card__header p {
+      margin: 0;
+      font-size: 15px;
+      color: #C7D0E0;
+    }
+    .card__body { padding: 30px 40px 36px; }
+    .intro {
+      margin: 0 0 26px;
+      font-size: 15px;
+      color: var(--fsm-muted);
+    }
+    .section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 16px;
+    }
+    .section__num {
+      flex: 0 0 auto;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--fsm-orange);
+      color: #fff;
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .section__title {
+      font-size: 16px; font-weight: 700; color: var(--fsm-navy);
+    }
+    .section + .grid { margin-bottom: 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+    }
+    .field { display: flex; flex-direction: column; }
+    .field--full { grid-column: 1 / -1; }
+    label {
+      font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--fsm-navy);
+    }
+    label .req { color: var(--fsm-orange); }
+    input {
+      font: inherit; font-size: 15px;
+      padding: 11px 13px;
+      border: 1px solid var(--fsm-border);
+      border-radius: 8px; background: #fff; color: var(--fsm-text);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    input:focus {
+      outline: none; border-color: var(--fsm-orange);
+      box-shadow: 0 0 0 3px rgba(238, 108, 43, 0.15);
+    }
+    .hint { font-size: 12px; color: var(--fsm-muted); margin-top: 5px; }
+    .btn {
+      width: 100%; margin-top: 4px;
+      background: var(--fsm-orange); color: #fff;
+      font-size: 16px; font-weight: 700;
+      border: none; border-radius: 8px; padding: 14px 20px;
+      cursor: pointer; transition: background 0.15s ease, transform 0.05s ease;
+    }
+    .btn:hover { background: var(--fsm-orange-hover); }
+    .btn:active { transform: translateY(1px); }
+    .privacy { font-size: 12px; color: var(--fsm-muted); text-align: center; margin-top: 12px; }
+    .footer { text-align: center; font-size: 13px; color: var(--fsm-muted); margin-top: 22px; }
+    @media (max-width: 540px) {
+      .card__body, .card__header { padding-left: 24px; padding-right: 24px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card__header">
+      <img src="https://www.fastslowmotion.com/wp-content/uploads/2024/07/FastSlowMotion-logo.png" alt="Fast Slow Motion" />
+      <h1>Refer a Client</h1>
+      <p>Send a business our way, we'll take great care of them</p>
+    </div>
+
+    <div class="card__body">
+      <p class="intro">Know a business that could use our help? Use this form to refer them to Fast Slow Motion. Tell us about the business, then who you are so we can credit and thank you for the introduction.</p>
+
+      <!-- action / oid / retURL / lead_source / input names preserved from the Salesforce-generated form. Style only. -->
+      <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00Dfj00000hkJIL" method="POST">
+        <input type="hidden" name="oid" value="00Dfj00000hkJIL" />
+        <input type="hidden" name="retURL" value="https://carl.jibrilsulaiman.com/fsmdemo-thankyou" />
+        <!-- every submission from this form is a partner referral -->
+        <input type="hidden" name="lead_source" value="Referral Partner" />
+
+        <div class="section">
+          <span class="section__num">1</span>
+          <span class="section__title">The business you're referring</span>
+        </div>
+        <div class="grid">
+          <div class="field">
+            <label for="first_name">Contact First Name</label>
+            <input id="first_name" name="first_name" type="text" maxlength="40" />
+          </div>
+          <div class="field">
+            <label for="last_name">Contact Last Name <span class="req">*</span></label>
+            <input id="last_name" name="last_name" type="text" maxlength="80" required />
+          </div>
+          <div class="field field--full">
+            <label for="company">Company <span class="req">*</span></label>
+            <input id="company" name="company" type="text" maxlength="40" required />
+          </div>
+          <div class="field">
+            <label for="email">Contact Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" maxlength="80" required />
+          </div>
+          <div class="field">
+            <label for="phone">Contact Phone</label>
+            <input id="phone" name="phone" type="tel" maxlength="40" />
+          </div>
+        </div>
+
+        <div class="section">
+          <span class="section__num">2</span>
+          <span class="section__title">About you (the referring partner)</span>
+        </div>
+        <div class="grid">
+          <div class="field field--full">
+            <label for="00Nfj00005DlRcD">Your name / company <span class="req">*</span></label>
+            <input id="00Nfj00005DlRcD" name="00Nfj00005DlRcD" type="text" maxlength="80" placeholder="So we know who to credit" required />
+            <span class="hint">We'll link this referral to your partner record and make sure you get the credit.</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Submit Referral</button>
+        <p class="privacy">Referrals are used only to follow up with the business you introduced.</p>
+      </form>
+    </div>
+  </div>
+
+  <p class="footer">Fast Slow Motion &middot; Partner Referral Program</p>
+</body>
+</html>
